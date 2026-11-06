@@ -80,11 +80,24 @@ flowchart LR
 
 ## 📸 Screenshots
 
-| Resident Portal | Admin Control Center |
-| :---: | :---: |
-| <img src="./Frontend/src/assets/icon.png" width="90" alt="Resident Dashboard" /><br />*Ticket Submission & Tracking* | <img src="./Frontend/src/assets/logo.png" width="220" alt="Admin Dashboard" /><br />*Task Assignment & Room Management* |
+### 1. Public & Authentication
 
-> *Screenshots placeholder: Capture screens from `http://localhost:5173` and add images here.*
+| Home Landing Page | Sign In & Demo Role Switcher |
+| :---: | :---: |
+| ![FixMate Home Page](./screenshots/home.png) | ![FixMate Login Page](./screenshots/login.png) |
+| *Hero showcase & feature overview* | *Secure login with 1-click demo credentials switcher* |
+
+### 2. Role-Based Dashboards
+
+| Resident Portal | Maintenance Staff Hub |
+| :---: | :---: |
+| ![FixMate Resident Portal](./screenshots/resident-dashboard.png) | ![FixMate Staff Dashboard](./screenshots/staff-dashboard.png) |
+| *Ticket submission, room desk & live status tracking* | *Assigned work orders, status toggles & remarks* |
+
+| Admin Master Control |
+| :---: |
+| ![FixMate Admin Operations Dashboard](./screenshots/admin-dashboard.png) |
+| *Hostel operations overview, ticket allocation & room management* |
 
 ---
 
