@@ -20,6 +20,13 @@ A modern full-stack MERN platform designed to streamline complaint management, t
 
 ---
 
+## 🌐 Live Demo
+
+> **Status:** 🟡 **Coming Soon – Deployment in Progress**  
+> **Live URL:** `https://your-deployment-url-here.com` *(Placeholder — will be updated upon production release)*
+
+---
+
 ## 📖 About
 
 FixMate replaces manual paper registers and chaotic messaging with a centralized, role-based maintenance portal. It connects hostel residents, maintenance staff, and administrators in a single transparent workflow—ensuring issues are reported instantly, assigned without delay, and resolved with full accountability.
@@ -114,13 +121,6 @@ npm run dev
 | **Admin** | `admin@fixmate.com` | `password123` |
 | **Staff** | `staff@fixmate.com` | `password123` |
 | **Resident** | `resident@fixmate.com` | `password123` |
-
----
-
-## 🌐 Live Demo
-
-- **Status:** 🟡 Coming Soon – Deployment in Progress
-- **Live URL:** `https://fixmate-app.vercel.app` *(Placeholder – will be updated upon production deployment)*
 
 ---
 
