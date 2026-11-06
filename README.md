@@ -105,8 +105,8 @@ flowchart LR
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/r0kumar/FixMate.git
-cd FixMate
+git clone https://github.com/r0kumar/FixMate-PG-Hostel-Maintenance-Tracker.git
+cd FixMate-PG-Hostel-Maintenance-Tracker
 ```
 
 ### 2. Backend Setup
