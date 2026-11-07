@@ -8,6 +8,8 @@
 
 A modern full-stack MERN platform to streamline complaint management, technician work orders, and resolution tracking for PG and hostel accommodations. Includes an isolated **Three-Role Interactive Demo Sandbox** alongside the real authentication system.
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_FixMate-2563eb?style=for-the-badge&logo=vercel)](https://fix-mate-pg-hostel-maintenance-trac.vercel.app/)
+
 [![React](https://img.shields.io/badge/React-18.3-blue.svg?logo=react&style=flat-square)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-green.svg?logo=node.js&style=flat-square)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.21-black.svg?logo=express&style=flat-square)](https://expressjs.com/)
@@ -17,6 +19,13 @@ A modern full-stack MERN platform to streamline complaint management, technician
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 </div>
+
+---
+
+## 🌐 Live Application
+
+> **🔗 Production URL:** [https://fix-mate-pg-hostel-maintenance-trac.vercel.app/](https://fix-mate-pg-hostel-maintenance-trac.vercel.app/)  
+> Experience both the **Real Application** (`/login`) and the **Interactive Demo Sandbox** (`/demo`) live in your browser.
 
 ---
 
