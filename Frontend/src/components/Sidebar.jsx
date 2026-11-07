@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import api from '../services/api';
+import { useSession } from '../context/SessionContext';
 import {
   LayoutDashboard,
   PlusCircle,
@@ -17,7 +16,7 @@ import {
 } from 'lucide-react';
 
 const Sidebar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, api, isDemo, baseRoute } = useSession();
   const navigate = useNavigate();
   const [complaintCount, setComplaintCount] = useState(null);
   const [pendingCount, setPendingCount] = useState(null);
@@ -45,7 +44,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate(isDemo ? '/demo' : '/login');
   };
 
   if (!user) return null;
@@ -55,10 +54,10 @@ const Sidebar = () => {
     {
       title: 'Overview',
       links: [
-        { name: 'Dashboard', to: '/resident/dashboard', icon: LayoutDashboard },
+        { name: 'Dashboard', to: `${baseRoute}/resident`, icon: LayoutDashboard },
         {
           name: 'My Complaints',
-          to: '/resident/my-complaints',
+          to: `${baseRoute}/resident/my-complaints`,
           icon: ClipboardList,
           badge: complaintCount !== null ? complaintCount : undefined,
         },
@@ -67,7 +66,7 @@ const Sidebar = () => {
     {
       title: 'Services',
       links: [
-        { name: 'Submit Complaint', to: '/resident/new-complaint', icon: PlusCircle, highlight: true },
+        { name: 'Submit Complaint', to: `${baseRoute}/resident/new-complaint`, icon: PlusCircle, highlight: true },
       ],
     },
   ];
@@ -77,7 +76,7 @@ const Sidebar = () => {
     {
       title: 'Overview',
       links: [
-        { name: 'Dashboard', to: '/staff/dashboard', icon: LayoutDashboard },
+        { name: 'Dashboard', to: `${baseRoute}/staff`, icon: LayoutDashboard },
       ],
     },
     {
@@ -85,7 +84,7 @@ const Sidebar = () => {
       links: [
         {
           name: 'My Tasks',
-          to: '/staff/tasks',
+          to: `${baseRoute}/staff/tasks`,
           icon: CheckSquare,
           badge: pendingCount !== null ? pendingCount : undefined,
           badgeColor: 'amber',
@@ -99,10 +98,10 @@ const Sidebar = () => {
     {
       title: 'Overview',
       links: [
-        { name: 'Dashboard', to: '/admin/dashboard', icon: LayoutDashboard },
+        { name: 'Dashboard', to: `${baseRoute}/admin`, icon: LayoutDashboard },
         {
           name: 'All Complaints',
-          to: '/admin/complaints',
+          to: `${baseRoute}/admin/complaints`,
           icon: ClipboardList,
           badge: pendingCount !== null && pendingCount > 0 ? `${pendingCount} new` : undefined,
           badgeColor: 'amber',
@@ -112,8 +111,8 @@ const Sidebar = () => {
     {
       title: 'Management',
       links: [
-        { name: 'Staff Management', to: '/admin/staff', icon: Users },
-        { name: 'Room Management', to: '/admin/rooms', icon: DoorClosed },
+        { name: 'Staff Management', to: `${baseRoute}/admin/staff`, icon: Users },
+        { name: 'Room Management', to: `${baseRoute}/admin/rooms`, icon: DoorClosed },
       ],
     },
   ];

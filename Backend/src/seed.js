@@ -1,16 +1,14 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import mongoose from 'mongoose';
 import User from './models/User.js';
 import Room from './models/Room.js';
 import Complaint from './models/Complaint.js';
 
-dotenv.config();
-
 const seedDatabase = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/fixmate';
-    await mongoose.connect(mongoUri);
-    console.log(`[MongoDB Seed] Connected to ${mongoUri}`);
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/fixmate';
+    const conn = await mongoose.connect(mongoUri);
+    console.log(`[MongoDB Seed] Connected successfully to host: ${conn.connection.host}`);
 
     // Clear previous records
     await User.deleteMany({});

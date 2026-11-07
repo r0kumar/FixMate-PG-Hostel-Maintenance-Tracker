@@ -7,23 +7,23 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Helper to determine destination route based on role
+  // Helper to determine destination route based on real user role
   const getRoleDashboard = (role) => {
     switch (role) {
       case 'admin':
-        return '/admin/dashboard';
+        return '/dashboard/admin';
       case 'staff':
-        return '/staff/dashboard';
+        return '/dashboard/staff';
       case 'resident':
       default:
-        return '/resident/dashboard';
+        return '/dashboard/resident';
     }
   };
 
-  // Check and restore user session on mount
+  // Check and restore real user session on mount
   useEffect(() => {
     const verifySession = async () => {
-      const storedUser = localStorage.getItem('fixmate_user');
+      const storedUser = localStorage.getItem('fixmate_real_user');
 
       if (!storedUser) {
         setLoading(false);
@@ -35,16 +35,19 @@ export const AuthProvider = ({ children }) => {
         if (parsed?.token) {
           // Verify token validity against backend /api/auth/me
           const { data } = await api.get('/auth/me');
-          const updatedUser = { ...data, token: parsed.token };
+          const updatedUser = {
+            ...data,
+            token: parsed.token,
+          };
           setUser(updatedUser);
-          localStorage.setItem('fixmate_user', JSON.stringify(updatedUser));
+          localStorage.setItem('fixmate_real_user', JSON.stringify(updatedUser));
         } else {
-          localStorage.removeItem('fixmate_user');
+          localStorage.removeItem('fixmate_real_user');
           setUser(null);
         }
       } catch (err) {
-        console.warn('Session verification failed or token expired:', err.message);
-        localStorage.removeItem('fixmate_user');
+        console.warn('Real user session verification failed:', err.message);
+        localStorage.removeItem('fixmate_real_user');
         setUser(null);
       } finally {
         setLoading(false);
@@ -54,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     verifySession();
   }, []);
 
-  // Login handler
+  // Real Login handler
   const login = async (email, password) => {
     const { data } = await api.post('/auth/login', {
       email: email.trim().toLowerCase(),
@@ -62,23 +65,23 @@ export const AuthProvider = ({ children }) => {
     });
 
     setUser(data);
-    localStorage.setItem('fixmate_user', JSON.stringify(data));
+    localStorage.setItem('fixmate_real_user', JSON.stringify(data));
     return data;
   };
 
-  // Resident registration handler
+  // Real Resident registration handler
   const register = async (userData) => {
     const { data } = await api.post('/auth/register', userData);
 
     setUser(data);
-    localStorage.setItem('fixmate_user', JSON.stringify(data));
+    localStorage.setItem('fixmate_real_user', JSON.stringify(data));
     return data;
   };
 
-  // Logout handler
+  // Real Logout handler (Clears only real session)
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('fixmate_user');
+    localStorage.removeItem('fixmate_real_user');
   };
 
   return (

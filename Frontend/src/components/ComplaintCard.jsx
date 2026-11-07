@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSession } from '../context/SessionContext';
 import {
   Calendar,
   Wrench,
@@ -52,6 +53,7 @@ const ComplaintCard = ({
   showActions = false,
   showDetailsLink = true,
 }) => {
+  const { baseRoute } = useSession();
   const statusInfo = statusStyles[complaint.status] || statusStyles.pending;
   const StatusIcon = statusInfo.icon;
 
@@ -133,7 +135,7 @@ const ComplaintCard = ({
 
           {showDetailsLink && (
             <Link
-              to={`/resident/complaints/${complaint._id}`}
+              to={`${baseRoute}/resident/complaints/${complaint._id}`}
               className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700 hover:underline ml-auto"
             >
               Details <ArrowRight className="w-3.5 h-3.5" />

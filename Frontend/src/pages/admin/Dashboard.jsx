@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import logo from '../../assets/logo.png';
 import {
   ClipboardList,
@@ -9,15 +9,14 @@ import {
   Users,
   DoorClosed,
   ArrowRight,
-  Wrench,
   AlertCircle,
   Loader2,
   UserPlus,
-  Plus,
   Tag,
 } from 'lucide-react';
 
 const AdminDashboard = () => {
+  const { api, baseRoute } = useSession();
   const [complaints, setComplaints] = useState([]);
   const [staff, setStaff] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -92,13 +91,13 @@ const AdminDashboard = () => {
           </div>
           <div className="flex flex-wrap gap-2.5">
             <Link
-              to="/admin/complaints"
+              to={`${baseRoute}/admin/complaints`}
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition shadow-sm"
             >
               <ClipboardList className="w-4 h-4" /> All Complaints
             </Link>
             <Link
-              to="/admin/staff"
+              to={`${baseRoute}/admin/staff`}
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition backdrop-blur-sm"
             >
               <UserPlus className="w-4 h-4" /> Add Staff
@@ -204,7 +203,7 @@ const AdminDashboard = () => {
             <p className="text-xs text-slate-500">Live feed of reported maintenance issues requiring allocation</p>
           </div>
           <Link
-            to="/admin/complaints"
+            to={`${baseRoute}/admin/complaints`}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 bg-blue-50 px-3 py-1.5 rounded-xl hover:bg-blue-100 transition w-fit"
           >
             <span>Manage All Tickets</span>

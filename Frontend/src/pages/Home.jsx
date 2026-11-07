@@ -4,19 +4,13 @@ import icon from '../assets/icon.png';
 import logo from '../assets/logo.png';
 import PublicFooter from '../components/PublicFooter';
 import {
-  Wrench,
-  ShieldCheck,
   Zap,
   Clock,
-  CheckCircle2,
   Users,
-  DoorClosed,
   ArrowRight,
   Sparkles,
   Phone,
   Mail,
-  Building2,
-  FileText,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -60,6 +54,13 @@ const Home = () => {
             ) : (
               <>
                 <Link
+                  to="/demo"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50/80 hover:bg-indigo-100/80 px-3 py-1.5 rounded-xl border border-indigo-200/70 transition"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                  <span>Demo Sandbox</span>
+                </Link>
+                <Link
                   to="/login"
                   className="text-xs font-bold text-slate-700 hover:text-blue-600 px-3 py-1.5 rounded-xl hover:bg-slate-100 transition"
                 >
@@ -97,10 +98,18 @@ const Home = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
             <Link
+              to="/demo"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-indigo-600 to-purple-600 hover:from-amber-600 hover:via-indigo-700 hover:to-purple-700 text-white font-bold px-6 py-3.5 rounded-2xl text-sm transition shadow-md shadow-indigo-500/20 active:scale-[0.98]"
+            >
+              <Sparkles className="w-4 h-4 text-amber-200" />
+              <span>Explore Interactive Dashboard</span>
+            </Link>
+
+            <Link
               to="/register"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3.5 rounded-2xl text-sm transition shadow-md shadow-blue-500/20 active:scale-[0.98]"
             >
-              <span>Get Started as Resident</span>
+              <span>Resident Registration</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 
@@ -108,7 +117,7 @@ const Home = () => {
               to="/login"
               className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 font-bold px-6 py-3.5 rounded-2xl text-sm transition border border-slate-200 shadow-xs"
             >
-              <span>Sign In to Portal</span>
+              <span>Sign In</span>
             </Link>
           </div>
         </section>

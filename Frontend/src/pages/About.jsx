@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/icon.png';
 import PublicFooter from '../components/PublicFooter';
-import { ShieldCheck, Users, Wrench, Heart, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Users, Wrench, Heart, ArrowLeft } from 'lucide-react';
 
 const About = () => {
   return (

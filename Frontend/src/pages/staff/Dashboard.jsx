@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import logo from '../../assets/logo.png';
 import {
   Wrench,
@@ -13,7 +12,6 @@ import {
   Phone,
   Mail,
   Search,
-  Filter,
   AlertCircle,
   Loader2,
   PlayCircle,
@@ -22,14 +20,13 @@ import {
   Image as ImageIcon,
   X,
   Calendar,
-  Sparkles,
 } from 'lucide-react';
 
 const categories = ['all', 'electrical', 'plumbing', 'cleaning', 'wifi', 'other'];
 const statuses = ['all', 'assigned', 'in_progress', 'resolved'];
 
 const StaffDashboard = () => {
-  const { user } = useAuth();
+  const { user, api } = useSession();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

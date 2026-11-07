@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import ComplaintCard from '../../components/ComplaintCard';
 import {
   PlusCircle,
   Search,
-  Filter,
   AlertCircle,
   Loader2,
   ClipboardList,
 } from 'lucide-react';
 
 const MyComplaints = () => {
+  const { api, baseRoute } = useSession();
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -72,7 +72,7 @@ const MyComplaints = () => {
         </div>
 
         <Link
-          to="/resident/new-complaint"
+          to={`${baseRoute}/resident/new-complaint`}
           className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition shadow-sm w-fit"
         >
           <PlusCircle className="w-4 h-4" />
@@ -154,7 +154,7 @@ const MyComplaints = () => {
           </p>
           {statusFilter === 'all' && categoryFilter === 'all' && !searchQuery && (
             <Link
-              to="/resident/new-complaint"
+              to={`${baseRoute}/resident/new-complaint`}
               className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm"
             >
               <PlusCircle className="w-3.5 h-3.5" /> Submit First Request

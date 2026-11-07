@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import {
   PlusCircle,
   AlertCircle,
@@ -10,8 +9,6 @@ import {
   X,
   Image as ImageIcon,
   Loader2,
-  CheckCircle,
-  Sparkles,
 } from 'lucide-react';
 
 const categories = [
@@ -30,7 +27,7 @@ const priorities = [
 ];
 
 const NewComplaint = () => {
-  const { user } = useAuth();
+  const { user, api, baseRoute } = useSession();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -107,7 +104,7 @@ const NewComplaint = () => {
         image: imagePreview || '',
       });
 
-      navigate('/resident/my-complaints');
+      navigate(`${baseRoute}/resident/my-complaints`);
     } catch (err) {
       setServerError(
         err.response?.data?.message || 'Failed to submit complaint. Please try again.'

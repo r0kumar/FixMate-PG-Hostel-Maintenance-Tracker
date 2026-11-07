@@ -4,7 +4,6 @@ import { useAuth } from '../context/AuthContext';
 import icon from '../assets/icon.png';
 import PublicFooter from '../components/PublicFooter';
 import {
-  Wrench,
   User,
   Mail,
   Lock,
@@ -15,9 +14,7 @@ import {
   AlertCircle,
   ArrowRight,
   Loader2,
-  CheckCircle2,
   ShieldCheck,
-  Zap,
 } from 'lucide-react';
 
 const Register = () => {
@@ -96,7 +93,7 @@ const Register = () => {
       });
 
       // Direct redirect to resident dashboard
-      navigate('/resident/dashboard', { replace: true });
+      navigate('/dashboard/resident', { replace: true });
     } catch (err) {
       setServerError(
         err.response?.data?.message ||

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/icon.png';
 import PublicFooter from '../components/PublicFooter';
-import { Zap, ShieldCheck, Clock, Users, DoorClosed, Image, Sparkles } from 'lucide-react';
+import { Zap, ShieldCheck, Clock, Users, DoorClosed } from 'lucide-react';
 
 const Features = () => {
   return (

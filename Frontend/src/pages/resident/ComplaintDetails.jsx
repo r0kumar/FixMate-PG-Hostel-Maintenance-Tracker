@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import {
   ArrowLeft,
   Calendar,
@@ -9,14 +9,12 @@ import {
   Wrench,
   Tag,
   Home,
-  User,
   Phone,
   Mail,
   AlertCircle,
   Loader2,
   Image as ImageIcon,
   MessageSquare,
-  ShieldAlert,
 } from 'lucide-react';
 
 const statusStepOrder = ['pending', 'assigned', 'in_progress', 'resolved'];
@@ -51,6 +49,7 @@ const statusMeta = {
 const ComplaintDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { api, baseRoute } = useSession();
 
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -100,7 +99,7 @@ const ComplaintDetails = () => {
           <h2 className="text-lg font-bold text-slate-900 mb-1">Unable to Display Ticket</h2>
           <p className="text-xs text-slate-500 mb-6">{error || 'Ticket not found'}</p>
           <Link
-            to="/resident/my-complaints"
+            to={`${baseRoute}/resident/my-complaints`}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to My Complaints
@@ -119,7 +118,7 @@ const ComplaintDetails = () => {
       {/* Header Bar */}
       <div className="flex items-center justify-between gap-4">
         <button
-          onClick={() => navigate('/resident/my-complaints')}
+          onClick={() => navigate(`${baseRoute}/resident/my-complaints`)}
           className="inline-flex items-center gap-2 p-2.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold transition shadow-sm"
         >
           <ArrowLeft className="w-4 h-4" />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import {
   Users,
   Mail,
@@ -11,10 +11,10 @@ import {
   Loader2,
   Calendar,
   X,
-  Lock,
 } from 'lucide-react';
 
 const AdminStaff = () => {
+  const { api } = useSession();
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

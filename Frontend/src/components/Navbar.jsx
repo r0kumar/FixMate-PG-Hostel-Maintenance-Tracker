@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
-import api from '../services/api';
+import { useSession } from '../context/SessionContext';
 import icon from '../assets/icon.png';
 import {
   LogOut,
@@ -15,7 +14,6 @@ import {
   Search,
   Home,
   Loader2,
-  Tag,
   ArrowRight,
   Clock,
   CheckCircle2,
@@ -24,7 +22,7 @@ import {
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, api, isDemo, baseRoute } = useSession();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,25 +38,25 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate(isDemo ? '/demo' : '/login');
   };
 
   const residentLinks = [
-    { name: 'Dashboard', to: '/resident/dashboard', icon: LayoutDashboard },
-    { name: 'New Complaint', to: '/resident/new-complaint', icon: PlusCircle },
-    { name: 'My Complaints', to: '/resident/my-complaints', icon: ClipboardList },
+    { name: 'Dashboard', to: `${baseRoute}/resident`, icon: LayoutDashboard },
+    { name: 'New Complaint', to: `${baseRoute}/resident/new-complaint`, icon: PlusCircle },
+    { name: 'My Complaints', to: `${baseRoute}/resident/my-complaints`, icon: ClipboardList },
   ];
 
   const staffLinks = [
-    { name: 'Dashboard', to: '/staff/dashboard', icon: LayoutDashboard },
-    { name: 'My Tasks', to: '/staff/tasks', icon: CheckSquare },
+    { name: 'Dashboard', to: `${baseRoute}/staff`, icon: LayoutDashboard },
+    { name: 'My Tasks', to: `${baseRoute}/staff/tasks`, icon: CheckSquare },
   ];
 
   const adminLinks = [
-    { name: 'Dashboard', to: '/admin/dashboard', icon: LayoutDashboard },
-    { name: 'Complaints', to: '/admin/complaints', icon: ClipboardList },
-    { name: 'Staff Management', to: '/admin/staff', icon: Users },
-    { name: 'Room Management', to: '/admin/rooms', icon: DoorClosed },
+    { name: 'Dashboard', to: `${baseRoute}/admin`, icon: LayoutDashboard },
+    { name: 'Complaints', to: `${baseRoute}/admin/complaints`, icon: ClipboardList },
+    { name: 'Staff Management', to: `${baseRoute}/admin/staff`, icon: Users },
+    { name: 'Room Management', to: `${baseRoute}/admin/rooms`, icon: DoorClosed },
   ];
 
   let links = residentLinks;
@@ -132,11 +130,11 @@ const Navbar = () => {
     const query = encodeURIComponent(searchTerm.trim());
 
     if (user?.role === 'resident') {
-      navigate(`/resident/my-complaints?search=${query}`);
+      navigate(`${baseRoute}/resident/my-complaints?search=${query}`);
     } else if (user?.role === 'staff') {
-      navigate(`/staff/tasks?search=${query}`);
+      navigate(`${baseRoute}/staff/tasks?search=${query}`);
     } else if (user?.role === 'admin') {
-      navigate(`/admin/complaints?search=${query}`);
+      navigate(`${baseRoute}/admin/complaints?search=${query}`);
     }
   };
 
@@ -146,11 +144,11 @@ const Navbar = () => {
     setSearchTerm('');
 
     if (user?.role === 'resident') {
-      navigate(`/resident/complaints/${item._id}`);
+      navigate(`${baseRoute}/resident/complaints/${item._id}`);
     } else if (user?.role === 'staff') {
-      navigate(`/staff/tasks?search=${encodeURIComponent(item.title)}`);
+      navigate(`${baseRoute}/staff/tasks?search=${encodeURIComponent(item.title)}`);
     } else if (user?.role === 'admin') {
-      navigate(`/admin/complaints?search=${encodeURIComponent(item.title)}`);
+      navigate(`${baseRoute}/admin/complaints?search=${encodeURIComponent(item.title)}`);
     }
   };
 
@@ -363,7 +361,7 @@ const Navbar = () => {
               {/* Action shortcut for resident */}
               {user.role === 'resident' && (
                 <Link
-                  to="/resident/new-complaint"
+                  to={`${baseRoute}/resident/new-complaint`}
                   className="hidden sm:inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow-xs hover:shadow-sm shadow-blue-500/20 active:scale-[0.98]"
                 >
                   <PlusCircle className="w-3.5 h-3.5" />
@@ -374,7 +372,7 @@ const Navbar = () => {
               {/* Action shortcut for admin */}
               {user.role === 'admin' && (
                 <Link
-                  to="/admin/complaints"
+                  to={`${baseRoute}/admin/complaints`}
                   className="hidden sm:inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition shadow-xs hover:shadow-sm shadow-blue-500/20 active:scale-[0.98]"
                 >
                   <ClipboardList className="w-3.5 h-3.5" />

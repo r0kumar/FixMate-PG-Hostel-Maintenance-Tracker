@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import {
   Search,
-  Filter,
   Trash2,
   Tag,
   Home,
@@ -13,7 +12,6 @@ import {
   Loader2,
   CheckCircle2,
   Clock,
-  Wrench,
   Image as ImageIcon,
 } from 'lucide-react';
 
@@ -21,6 +19,7 @@ const categories = ['all', 'electrical', 'plumbing', 'cleaning', 'wifi', 'other'
 const statuses = ['all', 'pending', 'assigned', 'in_progress', 'resolved'];
 
 const AdminComplaints = () => {
+  const { api } = useSession();
   const [complaints, setComplaints] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [loading, setLoading] = useState(true);

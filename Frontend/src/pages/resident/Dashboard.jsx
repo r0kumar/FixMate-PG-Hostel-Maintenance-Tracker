@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import ComplaintCard from '../../components/ComplaintCard';
 import logo from '../../assets/logo.png';
 import {
@@ -14,11 +13,10 @@ import {
   ClipboardList,
   AlertCircle,
   Loader2,
-  Tag,
 } from 'lucide-react';
 
 const ResidentDashboard = () => {
-  const { user } = useAuth();
+  const { user, api, baseRoute } = useSession();
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -81,7 +79,7 @@ const ResidentDashboard = () => {
             <img src={logo} alt="FixMate" className="h-8 w-auto object-contain" />
           </div>
           <Link
-            to="/resident/new-complaint"
+            to={`${baseRoute}/resident/new-complaint`}
             className="inline-flex items-center gap-2 bg-white text-blue-700 hover:bg-blue-50 active:scale-[0.98] font-bold px-5 py-3 rounded-2xl text-sm transition shadow-md shadow-slate-900/10"
           >
             <PlusCircle className="w-4 h-4 text-blue-600" />
@@ -184,7 +182,7 @@ const ResidentDashboard = () => {
             <p className="text-xs text-slate-500">Latest updates on repairs and maintenance for your unit</p>
           </div>
           <Link
-            to="/resident/my-complaints"
+            to={`${baseRoute}/resident/my-complaints`}
             className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 bg-blue-50 px-3 py-1.5 rounded-xl hover:bg-blue-100 transition"
           >
             View All ({complaints.length}) <ArrowRight className="w-3.5 h-3.5" />
@@ -206,7 +204,7 @@ const ResidentDashboard = () => {
               Everything in Room {residentRoom} looks good! If you ever face an issue with plumbing, electrical, WiFi, or cleaning, submit a complaint here.
             </p>
             <Link
-              to="/resident/new-complaint"
+              to={`${baseRoute}/resident/new-complaint`}
               className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-sm"
             >
               <PlusCircle className="w-3.5 h-3.5" /> Submit a Request

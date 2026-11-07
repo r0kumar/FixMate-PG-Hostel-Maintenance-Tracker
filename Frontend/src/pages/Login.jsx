@@ -15,7 +15,6 @@ import {
   Building2,
   CheckCircle2,
   Sparkles,
-  ShieldCheck,
   Zap,
   Clock,
 } from 'lucide-react';
@@ -30,7 +29,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [activeRole, setActiveRole] = useState(null);
 
   const { login, getRoleDashboard } = useAuth();
   const navigate = useNavigate();
@@ -62,7 +60,6 @@ const Login = () => {
       setFormErrors({ ...formErrors, [e.target.name]: '' });
     }
     if (serverError) setServerError('');
-    setActiveRole(null);
   };
 
   const handleSubmit = async (e) => {
@@ -84,13 +81,6 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const fillDemo = (email, password, role) => {
-    setFormData({ email, password });
-    setActiveRole(role);
-    setFormErrors({});
-    if (serverError) setServerError('');
   };
 
   return (
@@ -164,71 +154,28 @@ const Login = () => {
             <div className="mb-5">
               <h2 className="text-xl font-bold text-slate-900">Sign in to your account</h2>
               <p className="text-xs text-slate-500 mt-1">
-                Select your role below or enter your credentials
+                Enter your registered FixMate credentials to access your dashboard
               </p>
             </div>
 
-            {/* Quick Demo Role Selector with Smooth Active States */}
-            <div className="mb-6 p-3.5 bg-slate-50/90 rounded-2xl border border-slate-200/80 transition-all">
-              <div className="text-[10px] uppercase font-bold text-slate-400 mb-2.5 tracking-wider flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-amber-500" /> Quick Demo Switcher
-                </span>
-                <span className="text-blue-600 font-semibold">1-Click Auto Fill</span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2">
-                <button
-                  type="button"
-                  onClick={() => fillDemo('admin@fixmate.com', 'password123', 'admin')}
-                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 border ${
-                    activeRole === 'admin'
-                      ? 'bg-amber-50 text-amber-900 border-amber-300 shadow-sm ring-2 ring-amber-500/20 scale-[1.02]'
-                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
-                  }`}
-                >
-                  <span>👑</span>
-                  <span>Admin</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => fillDemo('staff@fixmate.com', 'password123', 'staff')}
-                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 border ${
-                    activeRole === 'staff'
-                      ? 'bg-blue-50 text-blue-900 border-blue-300 shadow-sm ring-2 ring-blue-500/20 scale-[1.02]'
-                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
-                  }`}
-                >
-                  <span>🔧</span>
-                  <span>Staff</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => fillDemo('resident@fixmate.com', 'password123', 'resident')}
-                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 border ${
-                    activeRole === 'resident'
-                      ? 'bg-purple-50 text-purple-900 border-purple-300 shadow-sm ring-2 ring-purple-500/20 scale-[1.02]'
-                      : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300'
-                  }`}
-                >
-                  <span>🏠</span>
-                  <span>Resident</span>
-                </button>
-              </div>
-
-              {/* Satisfying Confirmation Notice */}
-              {activeRole && (
-                <div className="mt-2.5 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] animate-in fade-in duration-200">
-                  <span className="flex items-center gap-1.5 text-emerald-600 font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Demo credentials loaded
-                  </span>
-                  <span className="text-slate-400 font-mono text-[10px]">
-                    {formData.email}
-                  </span>
+            {/* Recruiter / Visitor Demo Sandbox Direct Link */}
+            <div className="mb-6 p-3.5 bg-gradient-to-r from-indigo-50/90 via-purple-50/60 to-blue-50/80 rounded-2xl border border-indigo-100 flex items-center justify-between gap-3 shadow-2xs">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-indigo-600 text-white flex items-center justify-center flex-shrink-0 shadow-xs text-sm">
+                  <Sparkles className="w-4 h-4 text-amber-200" />
                 </div>
-              )}
+                <div className="min-w-0">
+                  <p className="text-xs font-bold text-slate-900 leading-tight">Recruiter / Visitor Demo</p>
+                  <p className="text-[11px] text-slate-500 truncate">Explore Admin, Staff &amp; Resident dashboards</p>
+                </div>
+              </div>
+              <Link
+                to="/demo"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-indigo-700 font-bold text-xs border border-indigo-200/80 shadow-2xs hover:shadow-xs transition flex-shrink-0"
+              >
+                <span>Explore</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
 
             {/* Server Error Notification */}

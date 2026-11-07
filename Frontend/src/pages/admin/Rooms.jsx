@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
+import { useSession } from '../../context/SessionContext';
 import {
   DoorClosed,
   Plus,
@@ -9,11 +9,11 @@ import {
   Loader2,
   X,
   Building,
-  CheckCircle2,
   Bed,
 } from 'lucide-react';
 
 const AdminRooms = () => {
+  const { api } = useSession();
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

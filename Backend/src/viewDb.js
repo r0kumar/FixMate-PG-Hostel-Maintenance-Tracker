@@ -1,18 +1,16 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import mongoose from 'mongoose';
 import User from './models/User.js';
 import Room from './models/Room.js';
 import Complaint from './models/Complaint.js';
 
-dotenv.config();
-
 const viewDatabase = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/fixmate';
-    await mongoose.connect(mongoUri);
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/fixmate';
+    const conn = await mongoose.connect(mongoUri);
     console.log(`\n======================================================`);
-    console.log(` Connected to MongoDB: ${mongoUri}`);
-    console.log(` Database Name: fixmate`);
+    console.log(` Connected to MongoDB host: ${conn.connection.host}`);
+    console.log(` Database Name: ${conn.connection.name}`);
     console.log(`======================================================\n`);
 
     // 1. Users
