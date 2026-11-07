@@ -24,7 +24,7 @@ A modern full-stack MERN platform to streamline complaint management, technician
 
 ## 🌐 Live Application
 
-> **🔗 Production URL:** [https://fix-mate-pg-hostel-maintenance-trac.vercel.app/](https://fix-mate-pg-hostel-maintenance-trac.vercel.app/)  
+> **🔗 LIVE URL:** [https://fix-mate-pg-hostel-maintenance-trac.vercel.app/](https://fix-mate-pg-hostel-maintenance-trac.vercel.app/)  
 > Experience both the **Real Application** (`/login`) and the **Interactive Demo Sandbox** (`/demo`) live in your browser.
 
 ---
